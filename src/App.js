@@ -1,6 +1,7 @@
 import React from 'react';
 import BookCard from './components/BookCard';
 import MenuItem from './components/MenuItem/MenuItem';
+import SearchInput from './components/SearchInput/SearchInput';
 import { Container, Content, Dashboard, Header, Menu } from './styles';
 
 const data = {
@@ -26,7 +27,9 @@ function App() {
         </div>
       </Menu>
       <Dashboard>
-        <Header />
+        <Header>
+          <SearchInput />
+        </Header>
         <Content>
           {Array(10)
             .fill(0)

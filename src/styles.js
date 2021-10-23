@@ -42,6 +42,10 @@ export const Dashboard = styled.div`
 `;
 
 export const Header = styled.header`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px;
   height: 90px;
   width: 100%;
   background-color: #fff;
