@@ -4,9 +4,9 @@ import MenuItem from './components/MenuItem/MenuItem';
 import { Container, Content, Dashboard, Header, Menu } from './styles';
 
 const data = {
-  cover: '',
-  title: '',
-  author: '',
+  cover: 'https://images-na.ssl-images-amazon.com/images/I/81iqZ2HHD-L.jpg',
+  title: 'Harry Potter',
+  author: 'JK Rowling',
   price: '$10.00',
 };
 

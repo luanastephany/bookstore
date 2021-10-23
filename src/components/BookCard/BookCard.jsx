@@ -12,7 +12,7 @@ const BookCard = ({ data }) => {
         <ReactStars
           count={5}
           size={24}
-          activeColor='#ffd700'
+          activeColor='#f4b75b'
           value={4}
           edit={false}
         />
