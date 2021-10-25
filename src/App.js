@@ -1,17 +1,31 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import BookCard from './components/BookCard';
 import MenuItem from './components/MenuItem/MenuItem';
 import SearchInput from './components/SearchInput/SearchInput';
 import { Container, Content, Dashboard, Header, Menu } from './styles';
 
-const data = {
-  cover: 'https://images-na.ssl-images-amazon.com/images/I/81iqZ2HHD-L.jpg',
-  title: 'Harry Potter',
-  author: 'JK Rowling',
-  price: '$10.00',
-};
-
 function App() {
+  const [books, setBooks] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const loadBooks = async () => {
+    const response = await axios.get('http://localhost:1337/books');
+    console.log(response);
+    setBooks(response.data);
+  };
+
+  const loadCategories = async () => {
+    const response = await axios.get('http://localhost:1337/categories');
+    console.log(response);
+    setCategories(response.data);
+  };
+
+  useEffect(() => {
+    loadBooks();
+    loadCategories();
+  }, []);
+
   return (
     <Container>
       <Menu>
@@ -20,10 +34,15 @@ function App() {
         </div>
         <div className='categories'>
           <h2>Categories</h2>
-          <MenuItem icon='AiFillHeart' label='Romance' />
-          <MenuItem icon='FaLaughSquint' label='Comedy' />
-          <MenuItem icon='GiPumpkinMask' label='Horror' />
-          <MenuItem icon='FaSketch' label='Finanças' />
+          <MenuItem icon='FaStar' label='All' onClick={() => loadBooks()} />
+          {categories.map((item) => (
+            <MenuItem
+              key={item.id}
+              icon={item.icon}
+              label={item.label}
+              onClick={() => setBooks(item.books)}
+            />
+          ))}
         </div>
       </Menu>
       <Dashboard>
@@ -31,11 +50,9 @@ function App() {
           <SearchInput />
         </Header>
         <Content>
-          {Array(10)
-            .fill(0)
-            .map((_, index) => (
-              <BookCard key={index} data={data} />
-            ))}
+          {books.map((book) => (
+            <BookCard key={book.id} book={book} />
+          ))}
         </Content>
       </Dashboard>
     </Container>
