@@ -11,14 +11,19 @@ function App() {
 
   const loadBooks = async () => {
     const response = await axios.get('http://localhost:1337/books');
-    console.log(response);
     setBooks(response.data);
   };
 
   const loadCategories = async () => {
     const response = await axios.get('http://localhost:1337/categories');
-    console.log(response);
     setCategories(response.data);
+  };
+
+  const onSearch = async (value) => {
+    const response = await axios.get(
+      `http://localhost:1337/books?title_contains=${value}`
+    );
+    setBooks(response.data);
   };
 
   useEffect(() => {
@@ -47,7 +52,7 @@ function App() {
       </Menu>
       <Dashboard>
         <Header>
-          <SearchInput />
+          <SearchInput onSearch={onSearch} />
         </Header>
         <Content>
           {books.map((book) => (
